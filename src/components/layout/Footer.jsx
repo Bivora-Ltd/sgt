@@ -70,7 +70,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col  justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © 2025 StreetGotTalent. All rights reserved.
+            © 2025 Street's Got Talent. All rights reserved.
           </p>
           <p className="text-gray-400 text-xs mt-2">
             A project proudly crafted by <a href="https://bivoraltd.com" target="_blank" rel="noopener noreferrer" className="hover:underline">Bivora Ltd</a>.

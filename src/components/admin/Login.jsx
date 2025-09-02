@@ -6,7 +6,7 @@ import { adminLogin } from '../../api/admin';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false);    
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const handleChange = (e) => {
@@ -27,11 +27,13 @@ const Login = () => {
         }
         setLoading(true);
         const result = await adminLogin(email, password);
+        console.log(result);
+        setLoading(false);
         if (!result.accessToken) {
-            setLoading(false);
-            setError('Login failed: ' + result.message);
+            setError('Login failed: ' + result.error);
             return;
         }
+        setError(null);
         localStorage.setItem('adminToken', result.accessToken);
         window.location.reload();
     }
