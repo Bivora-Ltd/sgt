@@ -144,7 +144,7 @@ const ContestantProfile = () => {
           amount={streetfoods.find(f => f._id === pendingVote.foodId).price * pendingVote.qty}
           email={fanEmail}
           currency={"NGN"}
-          onSuccess= {async response => {
+          onSuccess={async response => {
             let result = await verifyPayment(response.reference, {
               name: fanName || 'Anonymous',
               paymentFor: "voting",
@@ -202,18 +202,17 @@ const ContestantProfile = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
                 <div className="absolute bottom-6 left-6">
                   <h1 className="text-3xl font-bold text-white mb-2">{contestant.name} <span className="inline-flex items-center px-3 py-1 bg-gray-500 text-white text-sm font-medium rounded-full">
-                      {contestant.group}
-                    </span></h1>
+                    {contestant.group}
+                  </span></h1>
                   <div className="flex items-center space-x-4">
                     <span className="inline-flex items-center px-3 py-1 bg-primary-500 text-white text-sm font-medium rounded-full">
                       {contestant.performanceType}
                     </span>
                     <span
-                      className={`inline-flex items-center px-3 py-1 text-sm font-medium rounded-full ${
-                        contestant.status === 'evicted'
-                          ? 'bg-red-500 text-white'
-                          : 'bg-primary-500 text-white'
-                      }`}
+                      className={`inline-flex items-center px-3 py-1 text-sm font-medium rounded-full ${contestant.status === 'evicted'
+                        ? 'bg-red-500 text-white'
+                        : 'bg-primary-500 text-white'
+                        }`}
                     >
                       {contestant.status}
                     </span>
@@ -354,11 +353,11 @@ const ContestantProfile = () => {
                   );
                 })}
               </div>
-              <div className="mt-6 pt-6 border-t border-gray-200">
+              {/* <div className="mt-6 pt-6 border-t border-gray-200">
                 <p className="text-xs text-gray-500 text-center">
-                  All purchases support the contestant and the StreetGotTalent platform.
+                  All purchases support the contestant and the Street's Got Talent platform.
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Play, Users, Trophy, Heart } from 'lucide-react';
+import { Play, Users, Trophy, Heart, CreditCard } from 'lucide-react';
 import { getCurrentSeason } from '../../api/seasons.js';
 
 const Hero = () => {
@@ -51,8 +51,9 @@ const Hero = () => {
             </div>
 
             <h1 className="text-8xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              Streets Got 
+              Street's Got
               <span className="md:block text-accent-300"> Talent</span>
+              <span className='block text-white text-lg'>The stage is 'urzzz</span>
             </h1>
 
             <p className="text-xl text-white text-opacity-90 mb-8 max-w-lg">
@@ -115,14 +116,23 @@ const Hero = () => {
                   </div>
                   <h3 className="text-2xl font-bold text-green-950 mb-4">Support Street Artists</h3>
                   <p className="text-green-950 text-opacity-90">
-                    Every vote counts! Purchase street food to cast votes for your favorite performers.
+                    On these streets, dreams die in silence every day. Your donation is the difference between a talent fading away… or finding a stage that could change their life forever.
                   </p>
-                  <div className="mt-6 grid grid-cols-3 gap-2">
+                  {/* <div className="mt-6 grid grid-cols-3 gap-2">
                     {['🌮', '🍔', '🍕'].map((emoji, index) => (
                       <div key={index} className="text-3xl p-3 bg-white bg-opacity-20 rounded-lg">
                         {emoji}
                       </div>
                     ))}
+                  </div> */}
+                  <div className='mt-6'>
+                    <Link
+                      className="px-8 py-3 bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold rounded-lg hover:from-primary-700 hover:to-secondary-700 transition-all duration-200 transform hover:scale-105"
+                      disabled={loading}
+                      to={'/donate'}
+                    >
+                      <CreditCard className="h-5 w-5 mr-2 inline" />Donate Now
+                    </Link>
                   </div>
                 </div>
               </div>

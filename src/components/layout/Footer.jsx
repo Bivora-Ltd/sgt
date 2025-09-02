@@ -22,7 +22,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-gray-400 mb-6 max-w-md">
-              Discover and support amazing street talent from around the city. 
+              Discover and support amazing street talent from around the city.
               Every vote makes a difference in someone's dream.
             </p>
             <div className="flex space-x-4">

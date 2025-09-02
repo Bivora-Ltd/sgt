@@ -116,13 +116,13 @@ const RegistrationForm = () => {
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Registration Successful!</h2>
           <p className="text-gray-600 mb-6">
-            Welcome to StreetGotTalent, {formData.name}! Your registration has been submitted successfully.
+            Welcome to Street's Got Talent, {formData.name}! Your registration has been submitted successfully.
             You'll receive a confirmation email shortly with next steps.
           </p>
           <div className="bg-gray-50 rounded-lg p-4 mb-6">
             <p className="text-sm text-gray-600">
-              <strong>Registration Fee:</strong>₦{Number(season?.registrationFee).toLocaleString(undefined)}<br/>
-              <strong>Performance Type:</strong> {formData.performance_type}<br/>
+              <strong>Registration Fee:</strong>₦{Number(season?.registrationFee).toLocaleString(undefined)}<br />
+              <strong>Performance Type:</strong> {formData.performance_type}<br />
             </p>
           </div>
           <button
@@ -162,7 +162,7 @@ const RegistrationForm = () => {
           </p>
           <div className="bg-gray-50 rounded-lg p-4 mb-6">
             <p className="text-sm text-gray-600">
-              <strong>Contact us:</strong>xpat@streetgottalent.com<br/>
+              <strong>Contact us:</strong>xpat@streetgottalent.com<br />
             </p>
           </div>
           {/* <button
@@ -232,7 +232,7 @@ const RegistrationForm = () => {
     <div className="max-w-2xl mx-auto">
       <div className="bg-white rounded-xl shadow-lg overflow-hidden">
         <div className="bg-gradient-to-r from-primary-600 to-secondary-600 px-8 py-6">
-          <h1 className="text-2xl font-bold text-white">Register for StreetGotTalent</h1>
+          <h1 className="text-2xl font-bold text-white">Register for Street's Got Talent</h1>
           <p className="text-primary-100 mt-2">Join the most exciting street talent competition!</p>
         </div>
 
@@ -252,7 +252,7 @@ const RegistrationForm = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                  Full Name *
+                  Performance Name *
                 </label>
                 <input
                   type="text"
@@ -260,16 +260,15 @@ const RegistrationForm = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className={`w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 ${
-                    errors.name ? 'border-red-300' : ''
-                  }`}
-                  placeholder="Enter your full name"
+                  className={`w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 ${errors.name ? 'border-red-300' : ''
+                    }`}
+                  placeholder="Enter your performance name"
                 />
                 {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name}</p>}
               </div>
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                  Email Address *
+                  Email *
                 </label>
                 <input
                   type="email"
@@ -277,9 +276,8 @@ const RegistrationForm = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 ${
-                    errors.email ? 'border-red-300' : ''
-                  }`}
+                  className={`w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 ${errors.email ? 'border-red-300' : ''
+                    }`}
                   placeholder="your.email@example.com"
                 />
                 {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email}</p>}
@@ -294,9 +292,8 @@ const RegistrationForm = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className={`w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 ${
-                    errors.phone ? 'border-red-300' : ''
-                  }`}
+                  className={`w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 ${errors.phone ? 'border-red-300' : ''
+                    }`}
                   placeholder="08123456789"
                 />
                 {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone}</p>}
@@ -322,7 +319,7 @@ const RegistrationForm = () => {
                   value={formData.instagram}
                   onChange={handleChange}
                   className="w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
-                  placeholder="yourusername - without '@' "
+                  placeholder="username - without '@' "
                 />
               </div>
               <div>
@@ -336,7 +333,7 @@ const RegistrationForm = () => {
                   value={formData.tiktok}
                   onChange={handleChange}
                   className="w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
-                  placeholder="yourusername - without '@' "
+                  placeholder="username - without '@' "
                 />
               </div>
             </div>
@@ -357,9 +354,8 @@ const RegistrationForm = () => {
                 name="performance_type"
                 value={formData.performance_type}
                 onChange={handleChange}
-                className={`w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 ${
-                  errors.performance_type ? 'border-red-300' : ''
-                }`}
+                className={`w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 ${errors.performance_type ? 'border-red-300' : ''
+                  }`}
               >
                 <option value="">Select your performance type</option>
                 {PERFORMANCE_TYPES.map((type) => (
@@ -380,9 +376,8 @@ const RegistrationForm = () => {
                 value={formData.description}
                 onChange={handleChange}
                 rows={4}
-                className={`w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 ${
-                  errors.description ? 'border-red-300' : ''
-                }`}
+                className={`w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 ${errors.description ? 'border-red-300' : ''
+                  }`}
                 placeholder="Tell us about your performance style, experience, and what makes you unique..."
               />
               {errors.description && <p className="text-red-600 text-sm mt-1">{errors.description}</p>}
@@ -420,7 +415,7 @@ const RegistrationForm = () => {
             </div>
             {errors.profile && <p className="text-red-600 text-sm mt-1">{errors.profile}</p>}
           </div>
-          
+
           {/* Registration Fee */}
           <div className="bg-primary-50 rounded-lg p-4">
             <div className="flex items-center justify-between">
@@ -447,7 +442,7 @@ const RegistrationForm = () => {
                 Processing Registration...
               </div>
             ) : (
-              'Register for StreetGotTalent'
+              "Register for Street's Got Talent"
             )}
           </button>
 

@@ -9,6 +9,9 @@ export const PERFORMANCE_TYPES = [
   "Acrobatics",
   "DJ/Mixing",
   "Painting/Art",
+  "Hyping",
+  "Motivational Speaking",
+  "Acting",
   "Other",
 ];
 

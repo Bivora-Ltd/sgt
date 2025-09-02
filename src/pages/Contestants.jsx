@@ -32,8 +32,7 @@ const Contestants = () => {
             Meet Our Talented Contestants
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover amazing street performers competing for the title. 
-            Vote for your favorites by purchasing street food!
+            Your vote is more than a click — it’s hope. Every vote pushes a raw street talent closer to their dream stage. Support your favorite and be part of their story
           </p>
         </div>
 
@@ -56,7 +55,7 @@ const Contestants = () => {
               <ContestantCard
                 key={contestant._id}
                 contestant={contestant}
-                // onVote={handleVote}
+              // onVote={handleVote}
               />
             ))}
           </div>
