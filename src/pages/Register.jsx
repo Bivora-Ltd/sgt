@@ -39,7 +39,7 @@ const Register = () => {
                 <span className="text-xl font-bold text-accent-600">3</span>
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Start Competing</h3>
-              <p className="text-gray-600 text-sm">Fans can discover and vote for your talent!</p>
+              <p className="text-gray-600 text-sm">Fans can discover and vote for you!</p>
             </div>
           </div>
         </div>

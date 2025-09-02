@@ -233,7 +233,7 @@ const RegistrationForm = () => {
       <div className="bg-white rounded-xl shadow-lg overflow-hidden">
         <div className="bg-gradient-to-r from-primary-600 to-secondary-600 px-8 py-6">
           <h1 className="text-2xl font-bold text-white">Register for Street's Got Talent</h1>
-          <p className="text-primary-100 mt-2">Join the most exciting street talent competition!</p>
+          <p className="text-primary-100 mt-2">Join the most exciting street talent competition in the world!</p>
         </div>
 
         <form onSubmit={handleSubmit} className="p-8 space-y-6" encType="multipart/form-data">

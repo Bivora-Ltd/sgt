@@ -44,7 +44,7 @@ const Donate = () => {
     setShowFanForm(true);
   };
 
-  
+
   if (showPaystack) {
     return (
       <PaystackPayment
@@ -93,9 +93,58 @@ const Donate = () => {
               Support Street Talent
             </h1>
             <p className="text-xl text-primary-100 max-w-3xl mx-auto mb-8">
-              Your donation helps us provide a platform where street performers can showcase their talents, 
+              Your donation helps us provide a platform where street performers can showcase their talents,
               connect with fans, and build sustainable careers doing what they love.
             </p>
+
+            {/* Donation Form */}
+            <div className="bg-white rounded-xl shadow-lg p-8 mb-16">
+              <div className="max-w-2xl mx-auto text-center">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Custom Donation</h3>
+                <p className="text-gray-600 mb-6">
+                  Enter any amount that feels right for you.
+                </p>
+                <form onSubmit={handleDonate}>
+                  <div className="flex items-center justify-center space-x-4 mb-6">
+
+                    <div className="relative">
+                      <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg">
+                        {currencyConfig[currency].symbol}
+                      </span>
+                      <input
+                        type="number"
+                        min={currencyConfig[currency].min}
+                        value={amount}
+                        onChange={handleAmountChange}
+                        placeholder={currencyConfig[currency].min}
+                        className="pl-8 pr-4 py-3 w-32 text-center text-xl font-semibold rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                      />
+                    </div>
+                    <div>
+                      <select
+                        className="px-8 py-3 rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-lg font-semibold"
+                        value={currency}
+                        onChange={handleCurrencyChange}
+                      >
+                        <option value="NGN">₦ NGN</option>
+                        <option value="USD">$ USD</option>
+                        <option value="GHS">₵ GHS</option>
+                        <option value="ZAR">R ZAR</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="px-8 py-3 bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold rounded-lg hover:from-primary-700 hover:to-secondary-700 transition-all duration-200 transform hover:scale-105"
+                    disabled={loading}
+                  >
+                    <CreditCard className="h-5 w-5 mr-2 inline" />
+                    {loading ? "Processing..." : "Donate Now"}
+                  </button>
+                </form>
+              </div>
+            </div>
             <div className="inline-flex items-center text-primary-600 bg-white bg-opacity-20 rounded-full px-6 py-3 backdrop-blur-sm">
               <Heart className="h-5 w-5 mr-2 text-red-300" />
               Every donation makes a difference
@@ -149,97 +198,49 @@ const Donate = () => {
         )}
 
         {showFanForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm">
-            <h3 className="text-lg font-bold mb-4 text-center">Enter Your Details</h3>
-            <form
-              onSubmit={e => {
-                e.preventDefault();
-                setShowFanForm(false);
-                setShowPaystack(true);
-              }}
-            >
-              <input
-                type="text"
-                placeholder="Name (optional)"
-                value={fanName}
-                onChange={e => setFanName(e.target.value)}
-                className="mb-3 w-full border rounded px-3 py-2"
-              />
-              <input
-                type="email"
-                placeholder="Email (required)"
-                value={fanEmail}
-                onChange={e => setFanEmail(e.target.value)}
-                required
-                className="mb-4 w-full border rounded px-3 py-2"
-              />
-              <button
-                type="submit"
-                className="w-full py-2 bg-primary-600 text-white rounded hover:bg-primary-700"
+          <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm">
+              <h3 className="text-lg font-bold mb-4 text-center">Enter Your Details</h3>
+              <form
+                onSubmit={e => {
+                  e.preventDefault();
+                  setShowFanForm(false);
+                  setShowPaystack(true);
+                }}
               >
-                Continue to Payment
-              </button>
-              <button
-                type="button"
-                className="w-full py-2 mt-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
-                onClick={() => setShowFanForm(false)}
-              >
-                Cancel
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
-        
-        {/* Donation Form */}
-        <div className="bg-white rounded-xl shadow-lg p-8 mb-16">
-          <div className="max-w-2xl mx-auto text-center">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Custom Donation</h3>
-            <p className="text-gray-600 mb-6">
-              Enter any amount that feels right for you.
-            </p>
-            <form onSubmit={handleDonate}>
-              <div className="flex items-center justify-center space-x-4 mb-6">
-               
-                <div className="relative">
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg">
-                    {currencyConfig[currency].symbol}
-                  </span>
-                  <input
-                    type="number"
-                    min={currencyConfig[currency].min}
-                    value={amount}
-                    onChange={handleAmountChange}
-                    placeholder={currencyConfig[currency].min}
-                    className="pl-8 pr-4 py-3 w-32 text-center text-xl font-semibold rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
-                  />
-                </div>
-                <div>
-                  <select
-                    className="px-8 py-3 rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-lg font-semibold"
-                    value={currency}
-                    onChange={handleCurrencyChange}
-                  >
-                    <option value="NGN">₦ NGN</option>
-                    <option value="USD">$ USD</option>
-                    <option value="GHS">₵ GHS</option>
-                    <option value="ZAR">R ZAR</option>
-                  </select>
-                </div>
-              </div>
-              
+                <input
+                  type="text"
+                  placeholder="Name (optional)"
+                  value={fanName}
+                  onChange={e => setFanName(e.target.value)}
+                  className="mb-3 w-full border rounded px-3 py-2"
+                />
+                <input
+                  type="email"
+                  placeholder="Email (required)"
+                  value={fanEmail}
+                  onChange={e => setFanEmail(e.target.value)}
+                  required
+                  className="mb-4 w-full border rounded px-3 py-2"
+                />
                 <button
                   type="submit"
-                  className="px-8 py-3 bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold rounded-lg hover:from-primary-700 hover:to-secondary-700 transition-all duration-200 transform hover:scale-105"
-                  disabled={loading}
+                  className="w-full py-2 bg-primary-600 text-white rounded hover:bg-primary-700"
                 >
-                  <CreditCard className="h-5 w-5 mr-2 inline" />
-                  {loading ? "Processing..." : "Donate Now"}
+                  Continue to Payment
                 </button>
-            </form>
+                <button
+                  type="button"
+                  className="w-full py-2 mt-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
+                  onClick={() => setShowFanForm(false)}
+                >
+                  Cancel
+                </button>
+              </form>
+            </div>
           </div>
-        </div>
+        )}
+
 
         {/* How Donations Help */}
         <div className="bg-gradient-to-r from-primary-50 to-secondary-50 rounded-xl p-8">
@@ -249,22 +250,22 @@ const Donate = () => {
               <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-200 rounded-full mb-4">
                 <Users className="h-8 w-8 text-primary-600" />
               </div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">Platform Development</h4>
-              <p className="text-gray-600">Maintain and improve the platform that connects performers with fans worldwide.</p>
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Talent Development</h4>
+              <p className="text-gray-600">We’ve always had the talent, but never the chance. Your support means we can finally learn, grow, and prove that where we come from doesn’t define where we’re going.</p>
             </div>
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-secondary-200 rounded-full mb-4">
                 <Trophy className="h-8 w-8 text-secondary-600" />
               </div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">Prize Money</h4>
-              <p className="text-gray-600">Fund prize money and rewards that help contestants achieve their dreams.</p>
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Future Building</h4>
+              <p className="text-gray-600">Donations here go into education, tools, and opportunities that turn raw talent into lasting success.</p>
             </div>
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-accent-200 rounded-full mb-4">
                 <Heart className="h-8 w-8 text-accent-600" />
               </div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">Community Support</h4>
-              <p className="text-gray-600">Support outreach programs and resources for aspiring street performers.</p>
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Xpatainment Records</h4>
+              <p className="text-gray-600">Every great street star needs a stage beyond the street. With your support, we can sign and groom the most promising talents, giving them a chance to record, distribute, and share their music with the world.</p>
             </div>
           </div>
         </div>
