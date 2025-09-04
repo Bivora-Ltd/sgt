@@ -318,7 +318,7 @@ const ContestantProfile = () => {
                           disabled={qty <= 1 || voting}
                         >-</button>
                         <input
-                          type="number"
+                          type="text"
                           min={1}
                           value={qty}
                           onChange={e => {
@@ -328,7 +328,7 @@ const ContestantProfile = () => {
                               [food._id]: value
                             }));
                           }}
-                          className="w-12 text-center border-t border-b border-gray-200"
+                          className="w-12 text-center border-t border-b border-gray-200 px-3 py-1 focus:outline-none"
                           disabled={voting}
                         />
                         <button

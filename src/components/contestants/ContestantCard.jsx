@@ -15,7 +15,7 @@ const ContestantCard = ({ contestant }) => {
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
-        
+
         {/* Performance Type Badge */}
         <div className="absolute top-4 left-4">
           <span className="inline-flex items-center px-3 py-1 bg-primary-500 text-white text-xs font-medium rounded-full">
@@ -23,7 +23,7 @@ const ContestantCard = ({ contestant }) => {
             {contestant.performanceType}
           </span>
         </div>
-       
+
         {contestant.group && (
           <div className="absolute top-4 left-30">
             <span className="inline-flex items-center px-3 py-1 bg-primary-500 text-white text-xs font-medium rounded-full">
@@ -31,7 +31,7 @@ const ContestantCard = ({ contestant }) => {
               {contestant.group || 'none'}
             </span>
           </div>
-       )}
+        )}
 
         {/* Vote Count */}
         <div className="absolute top-4 right-4">
@@ -87,7 +87,7 @@ const ContestantCard = ({ contestant }) => {
             to={`/contestants/${contestant._id}`}
             className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium text-sm group"
           >
-            View Profile
+            Vote for Me
             <ExternalLink className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
