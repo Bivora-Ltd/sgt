@@ -8,10 +8,13 @@ import Donate from './pages/Donate.jsx';
 import Admin from './pages/Admin.jsx';
 import Search from './pages/Search.jsx';
 import ContestantProfile from './components/contestants/ContestantProfile.jsx';
+import ScrollToTop from './components/ScrollToTop.jsx';
+import NotFound from './components/NotFound.jsx';
 
 function App() {
   return (
     <Router>
+      < ScrollToTop />
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-grow">
@@ -23,6 +26,7 @@ function App() {
             <Route path="/donate" element={<Donate />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/search" element={<Search />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />
