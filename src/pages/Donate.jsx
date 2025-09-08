@@ -5,10 +5,11 @@ import { verifyPayment } from '../api/payment.js';
 
 const currencyConfig = {
   NGN: { symbol: '₦', min: 1000 },
-  USD: { symbol: '$', min: 1 },
+  USD: { symbol: '$', min: 2 },
   GHS: { symbol: '₵', min: 15 },
   ZAR: { symbol: 'R', min: 20 }
 };
+
 
 const Donate = () => {
   const impactStats = [
@@ -34,13 +35,18 @@ const Donate = () => {
   };
 
   const handleAmountChange = (e) => {
-    const value = Math.max(currencyConfig[currency].min, Number(e.target.value));
-    setAmount(value);
+    const value = e.target.value;
+    setAmount(value); // don’t clamp here
   };
+
 
   const handleDonate = (e) => {
     e.preventDefault();
-    if (amount < currencyConfig[currency].min) return;
+    if (Number(amount) < currencyConfig[currency].min) {
+      alert(`Minimum donation for ${currency} is ${currencyConfig[currency].symbol}${currencyConfig[currency].min}`);
+      return;
+    }
+
     setShowFanForm(true);
   };
 

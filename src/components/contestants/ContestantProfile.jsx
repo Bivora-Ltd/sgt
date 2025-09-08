@@ -193,7 +193,7 @@ const ContestantProfile = () => {
           {/* Profile Info */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-              <div className="relative h-96">
+              <div className="relative aspect-[16/9]">
                 <img
                   src={contestant.imageUrl}
                   alt={contestant.name}

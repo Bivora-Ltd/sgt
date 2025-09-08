@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Upload, User, Instagram, Zap, CheckCircle } from 'lucide-react';
 import { PERFORMANCE_TYPES } from '../../utils/constants.js';
 import { registerContestant } from '../../api/contestants.js';
@@ -7,6 +7,8 @@ import { getCurrentSeason } from '../../api/seasons.js';
 import PaystackPayment from '../PaystackPayment.jsx';
 import { verifyPayment } from '../../api/payment.js';
 import { PiWarningCircle } from 'react-icons/pi';
+import Cropper from 'react-easy-crop';
+import getCroppedImg from '../../utils/cropImage';
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +21,8 @@ const RegistrationForm = () => {
     profile: null,
     phone: ''
   });
+
+  const fileInputRef = useRef(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [success, setSuccess] = useState(false);
   const [errors, setErrors] = useState({});
@@ -26,6 +30,35 @@ const RegistrationForm = () => {
   const [season, setSeason] = useState({});
   const [loading, setLoading] = useState(true);
   const [formDataObj, setFormDataObj] = useState(null);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const [showCropper, setShowCropper] = useState(false);
+
+  const onCropComplete = (croppedArea, croppedAreaPixels) => {
+    setCroppedAreaPixels(croppedAreaPixels);
+  };
+
+  const handleCropConfirm = async () => {
+    try {
+      const croppedImage = await getCroppedImg(imagePreview, croppedAreaPixels);
+      setImagePreview(croppedImage);
+
+      // Convert base64 -> File so it works with FormData
+      const res = await fetch(croppedImage);
+      const blob = await res.blob();
+      const file = new File([blob], formData.profile.name, { type: blob.type });
+
+      setFormData(prev => ({ ...prev, profile: file }));
+      setShowCropper(false);
+
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   useEffect(() => {
     const fetchSeason = async () => {
@@ -58,17 +91,27 @@ const RegistrationForm = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setFormData(prev => ({
-        ...prev,
-        profile: file
-      }));
       const reader = new FileReader();
       reader.onload = (e) => {
         setImagePreview(e.target.result);
+        setFormData(prev => ({ ...prev, profile: file }));
+        setShowCropper(true); // show crop UI immediately
       };
       reader.readAsDataURL(file);
     }
   };
+
+  const handleCancelCrop = () => {
+    setImagePreview(null);
+    setFormData(prev => ({ ...prev, profile: null }));
+    setShowCropper(false);
+
+    // ✅ clear file input so user can re-select same file
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
 
   const validateForm = () => {
     const newErrors = {};
@@ -230,6 +273,41 @@ const RegistrationForm = () => {
 
   return (
     <div className="max-w-2xl mx-auto">
+
+      {showCropper && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+          <div className="bg-white p-4 rounded-lg w-[90%] max-w-md">
+            <div className="relative w-full h-80">
+              <Cropper
+                image={imagePreview}
+                crop={crop}
+                zoom={zoom}
+                aspect={16 / 9}   // 👈 enforce ratio (square: 1/1, portrait: 4/5, etc.)
+                onCropChange={setCrop}
+                onZoomChange={setZoom}
+                onCropComplete={onCropComplete}
+              />
+            </div>
+            <div className="flex justify-between mt-4">
+              <button
+                type="button"
+                className="px-4 py-2 bg-gray-300 rounded"
+                onClick={handleCancelCrop}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="px-4 py-2 bg-primary-600 text-white rounded"
+                onClick={handleCropConfirm}
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="bg-white rounded-xl shadow-lg overflow-hidden">
         <div className="bg-gradient-to-r from-primary-600 to-secondary-600 px-8 py-6">
           <h1 className="text-2xl font-bold text-white">Register for Street's Got Talent</h1>
@@ -409,6 +487,7 @@ const RegistrationForm = () => {
                   type="file"
                   accept="image/*"
                   onChange={handleImageChange}
+                  ref={fileInputRef}
                   className="hidden"
                 />
               </label>

@@ -8,7 +8,7 @@ const ContestantCard = ({ contestant }) => {
   return (
     <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
       {/* Image */}
-      <div className="relative h-64 overflow-hidden">
+      <div className="relative aspect-[16/9] overflow-hidden">
         <img
           src={contestant.imageUrl}
           alt={contestant.name}
