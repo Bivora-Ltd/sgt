@@ -85,10 +85,10 @@ const ContestantCard = ({ contestant }) => {
         <div className="flex items-center justify-between">
           <Link
             to={`/contestants/${contestant._id}`}
-            className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium text-sm group"
+            className="inline-flex items-center justify-center bg-primary-600 hover:bg-primary-700 text-white font-semibold text-base px-5 py-2 rounded-full shadow-lg transition-all duration-200 group"
           >
             Vote for Me
-            <ExternalLink className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" />
+            <ExternalLink className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
       </div>

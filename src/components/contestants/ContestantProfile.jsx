@@ -6,6 +6,7 @@ import { getAllStreetfoods } from '../../api/streetfoods.js';
 import { FaTiktok } from 'react-icons/fa';
 import PaystackPayment from '../PaystackPayment.jsx';
 import { verifyPayment } from '../../api/payment.js';
+import { useRef } from 'react';
 
 const ContestantProfile = () => {
   const { id } = useParams();
@@ -19,6 +20,9 @@ const ContestantProfile = () => {
   const [fanEmail, setFanEmail] = useState('');
   const [fanName, setFanName] = useState('');
   const [showFanForm, setShowFanForm] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  const votingRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +40,31 @@ const ContestantProfile = () => {
       }
     };
     fetchData();
+    setTimeout(() => {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }, 200);
   }, [id]);
+
+  useEffect(() => {
+    if (!loading && votingRef.current) {
+      setTimeout(() => {
+        votingRef.current.scrollIntoView({ behavior: 'smooth' });
+        // Adjust for sticky offset (top-24 = 6rem = 96px)
+        setTimeout(() => {
+          window.scrollBy({ top: -145, left: 0, behavior: 'instant' });
+        }, 400); // Wait for smooth scroll to finish
+      }, 200);
+    }
+  }, [loading]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 100); // Show after 100px scroll
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
 
   const handleVote = async (streetfoodId, qty = 1) => {
     try {
@@ -276,7 +304,7 @@ const ContestantProfile = () => {
           </div>
 
           {/* Voting Section */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1" id='voting' ref={votingRef}>
             <div className="bg-white rounded-xl shadow-lg p-6 sticky top-24">
               <h2 className="text-xl font-bold text-gray-900 mb-4 text-center">
                 Support {contestant.name}
@@ -347,7 +375,7 @@ const ContestantProfile = () => {
                         disabled={voting}
                         className="w-full py-2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-medium rounded-lg hover:from-primary-600 hover:to-secondary-600 transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:transform-none"
                       >
-                        {voting ? 'Processing...' : `Buy & Vote`}
+                        {voting ? 'Processing...' : `Vote`}
                       </button>
                     </div>
                   );
@@ -362,6 +390,24 @@ const ContestantProfile = () => {
           </div>
         </div>
       </div>
+      {showScrollTop && (
+        <div
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="fixed bottom-12 right-6 z-50 flex flex-col items-end cursor-pointer"
+          aria-label="View Contestant Student"
+        >
+          <button
+            className="bg-green-600 hover:bg-green-700 text-white p-3 rounded-full shadow-lg flex items-center justify-center"
+            style={{ outline: 'none', border: 'none' }}
+          >
+            {/* Upward arrow SVG */}
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+            </svg>
+          </button>
+          <span className="text-green-700 font-semibold mt-2 text-right w-full block">View Contestant Details</span>
+        </div>
+      )}
     </div>
   );
 };
