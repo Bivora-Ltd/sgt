@@ -57,6 +57,14 @@ const Donate = () => {
         amount={amount}
         email={fanEmail}
         currency={currency}
+        metadata={{
+          paymentFor: "donation",
+          name: fanName,
+          email: fanEmail,
+          amount,
+          channel: "web",
+          currency: "NGN"
+        }}
         onSuccess={async response => {
           setLoading(true);
           const result = await verifyPayment(response.reference, {
@@ -86,6 +94,7 @@ const Donate = () => {
           setFanEmail('');
         }}
       />
+
     );
   }
 

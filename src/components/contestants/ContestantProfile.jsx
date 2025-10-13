@@ -171,7 +171,17 @@ const ContestantProfile = () => {
         <PaystackPayment
           amount={streetfoods.find(f => f._id === pendingVote.foodId).price * pendingVote.qty}
           email={fanEmail}
-          currency={"NGN"}
+          currency="NGN"
+          metadata={{
+            paymentFor: "voting",
+            foodId: pendingVote.foodId,
+            qty: pendingVote.qty,
+            contestantId: contestant._id,
+            name: fanName,
+            email: fanEmail,
+            currency: "NGN",
+            channel: "web"
+          }}
           onSuccess={async response => {
             let result = await verifyPayment(response.reference, {
               name: fanName || 'Anonymous',
@@ -201,6 +211,7 @@ const ContestantProfile = () => {
             setFanName('');
           }}
         />
+
       )}
 
       {/* Back Button */}

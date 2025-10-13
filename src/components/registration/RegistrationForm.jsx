@@ -233,11 +233,20 @@ const RegistrationForm = () => {
   }
 
   if (showPaystack && formDataObj) {
+    console.log({ formData });
     return (
       <PaystackPayment
         amount={season.registrationFee}
         email={formData.email}
-        currency={"NGN"}
+        currency="NGN"
+        metadata={{
+          paymentFor: "registration",
+          formData,
+          name: formData.name,
+          email: formData.email,
+          channel: "web",
+          currency: "NGN"
+        }}
         onSuccess={async response => {
           setLoading(true);
           let result = await verifyPayment(response.reference, {
@@ -268,6 +277,7 @@ const RegistrationForm = () => {
           setShowPaystack(false);
         }}
       />
+
     );
   }
 
