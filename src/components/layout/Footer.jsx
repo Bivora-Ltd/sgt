@@ -73,7 +73,7 @@ const Footer = () => {
             © 2025 Street's Got Talent. All rights reserved.
           </p>
           <p className="text-gray-400 text-xs mt-2">
-            A project proudly crafted by <a href="https://bivoraltd.com" target="_blank" rel="noopener noreferrer" className="hover:underline">Bivora Ltd</a>.
+            A project proudly crafted by <a href="https://wa.link/483hz9" target="_blank" rel="noopener noreferrer" className="hover:underline">Bivora Ltd</a>.
           </p>
 
         </div>
